@@ -1,0 +1,29 @@
+=====================================================
+  CARPETA DE DOCUMENTOS — Freddy Pacheco Zambrano
+=====================================================
+
+Pon aquí los archivos PDF (o Word, Excel, etc.)
+que quieres mostrar en la página web.
+
+Los archivos deben llamarse exactamente igual
+que está escrito en el index.html:
+
+  diploma-de-grado.pdf
+  acta-de-grado.pdf
+  certificado-de-notas.pdf
+  paz-y-salvo.pdf
+
+Si quieres cambiar los nombres o agregar más,
+edita el array DOCS dentro del index.html.
+
+ESTRUCTURA DE CARPETAS:
+  index.html
+  documentos/
+    diploma-de-grado.pdf
+    acta-de-grado.pdf
+    certificado-de-notas.pdf
+    paz-y-salvo.pdf
+
+Al subir a GitHub Pages, sube AMBAS cosas:
+el index.html Y la carpeta "documentos" completa.
+=====================================================
