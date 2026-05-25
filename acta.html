@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acta de Grado — UNIMINUTO Virtual</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:  #1b2c6b; --navy2: #152255; --navy3: #0f1a40;
+    --yellow:#f5c400; --yellow2:#e0b200;
+    --bg:    #f2f4f8; --white: #ffffff;
+    --muted: #6b7a9e; --text:  #12213f;
+    --border:rgba(27,44,107,0.11); --border2:rgba(27,44,107,0.20);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;}
+  .banner{line-height:0;} .banner img{width:100%;display:block;}
+  .topbar{background:var(--navy3);padding:0 2rem;display:flex;align-items:center;gap:.5rem;font-size:.71rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.40);height:36px;}
+  .topbar a{color:rgba(255,255,255,.40);text-decoration:none;transition:color .2s;} .topbar a:hover{color:var(--yellow);}
+  .topbar-sep{opacity:.25;margin:0 2px;} .topbar-active{color:var(--yellow);}
+  .wrap{max-width:920px;margin:2rem auto;padding:0 1.5rem;flex:1;width:100%;}
+  .viewer-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(27,44,107,0.09);}
+  .card-accent{height:5px;background:var(--yellow);}
+  .viewer-header{padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+  .vt-wrap{display:flex;align-items:center;gap:.75rem;}
+  .vt-icon{width:36px;height:36px;border-radius:8px;background:rgba(27,44,107,0.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .vt-icon svg{width:18px;height:18px;color:var(--navy);}
+  .vt-title{font-size:1rem;font-weight:800;color:var(--navy);line-height:1.2;}
+  .vt-sub{font-size:.68rem;color:var(--muted);font-weight:500;margin-top:2px;}
+  .btn-back{display:inline-flex;align-items:center;gap:.4rem;background:var(--yellow);color:var(--navy3);font-weight:800;border:none;padding:.52rem .95rem;border-radius:7px;cursor:pointer;font-size:.7rem;font-family:'Montserrat',sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:background .15s,transform .15s;}
+  .btn-back:hover{background:var(--yellow2);transform:translateY(-1px);}
+  .btn-back svg{width:13px;height:13px;}
+  iframe{width:100%;height:82vh;border:none;display:block;}
+  footer{background:var(--navy3);color:rgba(255,255,255,.32);text-align:center;padding:1.2rem;font-size:.68rem;letter-spacing:.07em;font-weight:500;margin-top:2.5rem;}
+  footer strong{color:var(--yellow);font-weight:700;}
+</style>
+</head>
+<body>
+<header class="banner"><img src="banner.jpg" alt="UNIMINUTO"></header>
+<nav class="topbar">
+  <a href="index.html">Portal de Egresados</a>
+  <span class="topbar-sep">›</span>
+  <span class="topbar-active">Acta de Grado</span>
+</nav>
+<div class="wrap">
+  <div class="viewer-card">
+    <div class="card-accent"></div>
+    <div class="viewer-header">
+      <div class="vt-wrap">
+        <div class="vt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg></div>
+        <div>
+          <div class="vt-title">Acta de Grado</div>
+          <div class="vt-sub">Acta No. 1328 · Freddy Enrique Pacheco Zambrano · CC 1.129.514.067</div>
+        </div>
+      </div>
+      <a class="btn-back" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"/></svg>
+        Volver
+      </a>
+    </div>
+    <iframe src="acta.pdf#toolbar=0&navpanes=0&scrollbar=0" title="Acta de Grado UNIMINUTO"></iframe>
+  </div>
+</div>
+<footer>© 2026 <strong>UNIMINUTO</strong> — Corporación Universitaria Minuto de Dios · Portal de Egresados</footer>
+<script>
+  document.addEventListener("contextmenu",e=>e.preventDefault());
+  document.addEventListener("keydown",e=>{if((e.ctrlKey&&["s","p","u"].includes(e.key))||(e.ctrlKey&&e.shiftKey&&["i","j"].includes(e.key))||e.key==="F12")e.preventDefault();});
+</script>
+</body>
+</html>
