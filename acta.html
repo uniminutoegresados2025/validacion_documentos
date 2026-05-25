@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acta de Grado — UNIMINUTO Virtual</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#1b2c6b;--navy2:#152255;--navy3:#0f1a40;
+    --yellow:#f5c400;--yellow2:#e0b200;
+    --bg:#f2f4f8;--white:#ffffff;
+    --muted:#6b7a9e;--text:#12213f;
+    --border:rgba(27,44,107,0.11);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;}
+  .banner{line-height:0;} .banner img{width:100%;display:block;}
+  .topbar{background:var(--navy3);padding:0 2rem;display:flex;align-items:center;gap:.5rem;font-size:.71rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.40);height:36px;}
+  .topbar a{color:rgba(255,255,255,.40);text-decoration:none;transition:color .2s;} .topbar a:hover{color:var(--yellow);}
+  .topbar-sep{opacity:.25;margin:0 2px;} .topbar-active{color:var(--yellow);}
+  .alert-banner{background:linear-gradient(90deg,#1b2c6b 0%,#243880 100%);border-bottom:3px solid var(--yellow);padding:.85rem 2rem;display:flex;align-items:flex-start;gap:1rem;}
+  .alert-icon{width:36px;height:36px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .alert-icon svg{width:18px;height:18px;color:var(--navy3);}
+  .alert-title{font-size:.75rem;font-weight:800;color:var(--yellow);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.25rem;}
+  .alert-body{font-size:.71rem;color:rgba(255,255,255,0.75);font-weight:500;line-height:1.55;}
+  .wrap{max-width:920px;margin:1.8rem auto;padding:0 1.5rem;flex:1;width:100%;}
+  .viewer-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(27,44,107,0.09);}
+  .card-accent{height:5px;background:var(--yellow);}
+  .viewer-header{padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;}
+  .vt-wrap{display:flex;align-items:center;gap:.75rem;}
+  .vt-icon{width:36px;height:36px;border-radius:8px;background:rgba(27,44,107,0.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .vt-icon svg{width:18px;height:18px;color:var(--navy);}
+  .vt-title{font-size:1rem;font-weight:800;color:var(--navy);line-height:1.2;}
+  .vt-sub{font-size:.68rem;color:var(--muted);font-weight:500;margin-top:2px;}
+  .btn-back{display:inline-flex;align-items:center;gap:.4rem;background:var(--yellow);color:var(--navy3);font-weight:800;border:none;padding:.52rem .95rem;border-radius:7px;cursor:pointer;font-size:.7rem;font-family:'Montserrat',sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:background .15s,transform .15s;}
+  .btn-back:hover{background:var(--yellow2);transform:translateY(-1px);}
+  .btn-back svg{width:13px;height:13px;}
+  .img-viewer{position:relative;width:100%;background:#e8eaf0;padding:2rem 1.5rem;display:flex;justify-content:center;align-items:flex-start;min-height:500px;user-select:none;-webkit-user-select:none;}
+  .img-shield{position:absolute;inset:0;z-index:10;cursor:default;}
+  .doc-img{max-width:680px;width:100%;height:auto;display:block;border-radius:6px;box-shadow:0 8px 40px rgba(0,0,0,0.18);pointer-events:none;-webkit-user-drag:none;user-select:none;position:relative;z-index:1;}
+  .watermark{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+  .watermark-text{font-size:3.5rem;font-weight:900;color:rgba(27,44,107,0.07);text-transform:uppercase;letter-spacing:.3em;transform:rotate(-35deg);white-space:nowrap;user-select:none;}
+  footer{background:var(--navy3);color:rgba(255,255,255,.32);text-align:center;padding:1.2rem;font-size:.68rem;letter-spacing:.07em;font-weight:500;margin-top:2.5rem;}
+  footer strong{color:var(--yellow);font-weight:700;}
+  .modal-overlay{position:fixed;inset:0;background:rgba(10,18,50,0.75);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.5rem;}
+  .modal-box{background:var(--white);border-radius:16px;max-width:480px;width:100%;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.35);animation:modalIn .35s cubic-bezier(.34,1.56,.64,1) both;}
+  .modal-top{background:var(--navy);padding:1.5rem 1.8rem 1.2rem;display:flex;align-items:center;gap:1rem;}
+  .modal-badge{width:48px;height:48px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .modal-badge svg{width:24px;height:24px;color:var(--navy3);}
+  .modal-heading{font-size:.78rem;font-weight:900;color:var(--yellow);letter-spacing:.15em;text-transform:uppercase;line-height:1.3;}
+  .modal-body{padding:1.5rem 1.8rem;}
+  .modal-text{font-size:.80rem;color:var(--text);line-height:1.7;font-weight:500;margin-bottom:1.2rem;}
+  .modal-text strong{color:var(--navy);font-weight:800;}
+  .modal-list{list-style:none;margin-bottom:1.4rem;}
+  .modal-list li{font-size:.75rem;color:var(--muted);font-weight:600;padding:.35rem 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;}
+  .modal-list li:last-child{border-bottom:none;}
+  .modal-list li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--yellow);flex-shrink:0;}
+  .modal-actions{display:flex;gap:.75rem;}
+  .btn-accept{flex:1;background:var(--navy);color:var(--white);border:none;border-radius:8px;padding:.75rem;font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
+  .btn-accept:hover{background:var(--navy2);}
+  .btn-reject{background:none;color:var(--muted);border:1.5px solid var(--border);border-radius:8px;padding:.75rem 1.2rem;font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,color .2s;}
+  .btn-reject:hover{border-color:var(--navy);color:var(--navy);}
+  @keyframes modalIn{from{opacity:0;transform:scale(.88) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+</style>
+</head>
+<body>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-top">
+      <div class="modal-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+      <div class="modal-heading">Documento con<br>protección legal</div>
+    </div>
+    <div class="modal-body">
+      <p class="modal-text">
+        Este documento contiene <strong>información personal protegida</strong> de acuerdo con la 
+        Ley 1581 de 2012 (Habeas Data) y la normativa de la 
+        Corporación Universitaria Minuto de Dios — UNIMINUTO.
+      </p>
+      <ul class="modal-list">
+        <li>Queda prohibida su reproducción total o parcial</li>
+        <li>No está permitida su distribución o publicación</li>
+        <li>El uso indebido puede generar responsabilidad legal</li>
+        <li>Solo el titular tiene derecho a su consulta</li>
+      </ul>
+      <div class="modal-actions">
+        <button class="btn-accept" onclick="acceptAlert()">Entendido — Ver documento</button>
+        <button class="btn-reject" onclick="window.location.href='index.html'">Volver</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header class="banner"><img src="banner.jpg" alt="UNIMINUTO"></header>
+
+<nav class="topbar">
+  <a href="index.html">Portal de Egresados</a>
+  <span class="topbar-sep">›</span>
+  <span class="topbar-active">Acta de Grado</span>
+</nav>
+
+<div class="alert-banner">
+  <div class="alert-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </svg>
+  </div>
+  <div>
+    <div class="alert-title">Documento protegido — Uso restringido</div>
+    <div class="alert-body">
+      Este documento es de carácter confidencial. Su reproducción, distribución o publicación sin autorización 
+      constituye una violación a la Ley 1581 de 2012 y puede generar consecuencias legales. 
+      Solo el titular del documento está autorizado para su consulta.
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="viewer-card">
+    <div class="card-accent"></div>
+    <div class="viewer-header">
+      <div class="vt-wrap">
+        <div class="vt-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 12l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+        </div>
+        <div>
+          <div class="vt-title">Acta Individual de Grado No. 1328</div>
+          <div class="vt-sub">Freddy Enrique Pacheco Zambrano · CC 1.129.514.067</div>
+        </div>
+      </div>
+      <a class="btn-back" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"/></svg>
+        Volver
+      </a>
+    </div>
+
+    <div class="img-viewer">
+      <div class="img-shield"></div>
+      <div class="watermark"><div class="watermark-text">UNIMINUTO</div></div>
+      <img class="doc-img" src="acta.jpg" alt="Acta de Grado UNIMINUTO" draggable="false">
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 <strong>UNIMINUTO</strong> — Corporación Universitaria Minuto de Dios · Portal de Egresados</footer>
+
+<script>
+  function acceptAlert() {
+    document.getElementById("modalOverlay").style.display = "none";
+  }
+  document.addEventListener("contextmenu", e => e.preventDefault());
+  document.addEventListener("keydown", e => {
+    if ((e.ctrlKey && ["s","p","u","a","c"].includes(e.key)) ||
+        (e.ctrlKey && e.shiftKey && ["i","j","s"].includes(e.key)) ||
+        e.key === "F12" || e.key === "PrintScreen") {
+      e.preventDefault();
+    }
+  });
+  document.querySelectorAll("img").forEach(img => {
+    img.addEventListener("dragstart", e => e.preventDefault());
+    img.addEventListener("mousedown", e => e.preventDefault());
+  });
+  (function() {
+    const threshold = 160;
+    setInterval(() => {
+      if (window.outerWidth - window.innerWidth > threshold ||
+          window.outerHeight - window.innerHeight > threshold) {
+        document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:Montserrat,sans-serif;color:#1b2c6b;font-size:1rem;font-weight:700;">Acceso no autorizado.</div>';
+      }
+    }, 1000);
+  })();
+</script>
+</body>
+</html>
